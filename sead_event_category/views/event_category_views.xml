@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="event_category_tree_view" model="ir.ui.view">
+        <field name="name">event.category.tree</field>
+        <field name="model">event.category</field>
+        <field name="arch" type="xml">
+            <tree string="Categorías de Eventos">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="event_category_form_view" model="ir.ui.view">
+        <field name="name">event.category.form</field>
+        <field name="model">event.category</field>
+        <field name="arch" type="xml">
+            <form string="Categoría de Evento">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_event_category" model="ir.actions.act_window">
+        <field name="name">Categorías de Eventos</field>
+        <field name="res_model">event.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear una categoría de evento
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_event_category"
+              name="Categorías de Eventos"
+              parent="event.menu_event_configuration"
+              action="action_event_category"
+              sequence="4"/>
+</odoo>

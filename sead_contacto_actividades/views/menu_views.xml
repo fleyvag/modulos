@@ -1,0 +1,13 @@
+<odoo>
+    <menuitem id="menu_actividad_padre"
+              name="Actividades Padre"
+              parent="contacts.res_partner_menu_config"
+              action="act_actividad_padre"
+              sequence="10"/>
+
+    <menuitem id="menu_actividad_economica"
+              name="Actividades Económicas"
+              parent="contacts.res_partner_menu_config"
+              action="act_actividad_economica"
+              sequence="20"/>
+</odoo>

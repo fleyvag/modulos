@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_area" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.area</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="before">
+                <field name="area_id"
+                       placeholder="Área"
+                       invisible="is_company"/>
+                <field name="hierarchy_level_id"
+                       placeholder="Nivel Jerárquico"
+                       invisible="is_company"/>
+                <field name="status_id"
+                       placeholder="Estatus"
+                       invisible="is_company"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

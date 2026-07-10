@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_contact_area_user,contact.area.user,model_contact_area,base.group_user,1,1,1,1
+access_contact_hierarchy_level_user,contact.hierarchy.level.user,model_contact_hierarchy_level,base.group_user,1,1,1,1
+access_contact_status_user,contact.status.user,model_contact_status,base.group_user,1,1,1,1

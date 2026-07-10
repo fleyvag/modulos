@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_contact_area"
+              name="Áreas"
+              parent="contacts.res_partner_menu_config"
+              action="action_contact_area"
+              sequence="10"/>
+
+    <menuitem id="menu_contact_hierarchy_level"
+              name="Niveles Jerárquicos"
+              parent="contacts.res_partner_menu_config"
+              action="action_contact_hierarchy_level"
+              sequence="20"/>
+
+    <menuitem id="menu_contact_status"
+              name="Estatus"
+              parent="contacts.res_partner_menu_config"
+              action="action_contact_status"
+              sequence="30"/>
+</odoo>
