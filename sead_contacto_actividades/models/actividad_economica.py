@@ -4,6 +4,7 @@ from odoo import api, fields, models
 class ActividadEconomica(models.Model):
     _name = 'actividad.economica'
     _description = 'Actividad Económica'
+    _rec_name = 'nombre_completo'
 
     actividad = fields.Char(string='Actividad', required=True)
     actividad_padre_id = fields.Many2one(
