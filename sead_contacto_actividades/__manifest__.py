@@ -1,6 +1,6 @@
 {
     'name': 'Contacto - Actividades Padre y Económica',
-    'version': '17.0.1.0.0',
+    'version': '17.0.1.1.0',
     'category': 'Contacts',
     'summary': 'Agrega modelos Actividad Padre y Actividad Económica en Contactos > Configuración',
     'depends': ['contacts'],

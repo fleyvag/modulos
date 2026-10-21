@@ -5,25 +5,56 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
-            <field name="partner_id" position="after">
+            <xpath expr="//group[@name='lead_partner']/field[@name='partner_id']" position="after">
                 <field name="event_id" placeholder="Evento"/>
-            </field>
+            </xpath>
+            <xpath expr="//group[@name='opportunity_partner']/field[@name='partner_id']" position="after">
+                <field name="event_id" placeholder="Evento"/>
+            </xpath>
 
-            <xpath expr="//page[field[@name='description']]" position="before">
+            <xpath expr="//page[@name='internal_notes']" position="before">
                 <page name="order_lines" string="Línea de Pedido">
-                    <field name="custom_order_line_ids" nolabel="1">
+                    <field name="custom_order_line_ids" nolabel="1"
+                           context="{'default_event_id': event_id}">
                         <tree editable="bottom" multi_edit="1">
                             <field name="sequence" widget="handle"/>
+                            <field name="company_id" column_invisible="1"/>
+                            <field name="currency_id" column_invisible="1"/>
                             <field name="product_id" required="1"/>
                             <field name="name" placeholder="Descripción"/>
+                            <field name="event_id"/>
                             <field name="quantity"/>
                             <field name="price_unit"/>
+                            <field name="analytic_account_id" optional="show"/>
                             <field name="tax_ids" widget="many2many_tags"/>
-                            <field name="subtotal" sum="Total"/>
+                            <field name="subtotal"/>
                         </tree>
                     </field>
+                    <group class="oe_subtotal_footer oe_right" colspan="2" name="lines_total">
+                        <field name="company_currency" invisible="1"/>
+                        <field name="planned_revenue_usd" invisible="1"/>
+                        <field name="amount_of_quota"/>
+                        <field name="lines_amount_untaxed" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <field name="lines_amount_tax" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                        <div class="oe_subtotal_footer_separator oe_inline">
+                            <label for="lines_amount_total"/>
+                        </div>
+                        <field name="lines_amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+                    </group>
+                    <div class="oe_clear"/>
                 </page>
             </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_form_view_inherit_peso_cupo" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.peso.cupo</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="peso_cupo"/>
+            </field>
         </field>
     </record>
 </odoo>

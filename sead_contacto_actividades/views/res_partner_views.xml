@@ -4,13 +4,77 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="tamano_empresa" invisible="company_type != 'company'"/>
+            </field>
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="attributes">
+                <attribute name="string">Vendedor Inscripciones</attribute>
+            </xpath>
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
+                <field name="vendedor_auspicio_id" widget="many2one_avatar_user"/>
+            </xpath>
             <page name="internal_notes" position="after">
-                <page name="actividad_economica" string="Actividad Económica">
-                    <group>
-                        <field name="actividad_economica_id"/>
-                    </group>
+                <page name="actividad_economica" string="Actividades Económicas">
+                    <field name="actividad_economica_ids" nolabel="1">
+                        <tree>
+                            <field name="actividad_padre_id"/>
+                            <field name="actividad"/>
+                        </tree>
+                    </field>
                 </page>
             </page>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_inherit_actividad" model="ir.ui.view">
+        <field name="name">res.partner.tree.actividad</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="actividad_padre_ids" optional="show" widget="many2many_tags"/>
+                <field name="actividad_economica_ids" optional="show" widget="many2many_tags"/>
+            </field>
+            <field name="user_id" position="attributes">
+                <attribute name="string">Vendedor Inscripciones</attribute>
+            </field>
+            <field name="user_id" position="after">
+                <field name="vendedor_auspicio_id" optional="show" widget="many2one_avatar_user"/>
+            </field>
+            <field name="category_id" position="after">
+                <field name="tamano_empresa" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_partner_search_inherit_actividad" model="ir.ui.view">
+        <field name="name">res.partner.search.actividad</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="attributes">
+                <attribute name="string">Vendedor Inscripciones</attribute>
+            </field>
+            <field name="user_id" position="after">
+                <field name="vendedor_auspicio_id"/>
+                <field name="actividad_padre_ids"/>
+                <field name="actividad_economica_ids"/>
+            </field>
+            <filter name="salesperson" position="attributes">
+                <attribute name="string">Vendedor Inscripciones</attribute>
+            </filter>
+            <filter name="salesperson" position="after">
+                <filter name="group_vendedor_auspicio" string="Vendedor Auspicio"
+                        context="{'group_by': 'vendedor_auspicio_id'}"/>
+            </filter>
+            <group name="group_by" position="inside">
+                <filter name="group_actividad_padre" string="Actividad Padre"
+                        context="{'group_by': 'actividad_padre_ids'}"/>
+                <filter name="group_actividad_economica" string="Actividad Económica"
+                        context="{'group_by': 'actividad_economica_ids'}"/>
+                <filter name="group_tamano_empresa" string="Tamaño de la Empresa"
+                        context="{'group_by': 'tamano_empresa'}"/>
+            </group>
         </field>
     </record>
 </odoo>
